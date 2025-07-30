@@ -11,17 +11,24 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
-        const animals = ["cane", "gatto", "topo", "giraffa", "elefante", "ragno", "libellula", "lucertola"] 
+        const animals = []
+        const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
     </script>
     <script type="text/babel">
         const ReactApp = () => {
+
+            const { useState } = React
+
+            const [add, setAdd] = useState(animals)
+
             return (
                 <>
+                    <button onClick={() => setAdd([...add, animalsChoices[Math.floor(Math.random() * animalsChoices.length)]])} >Aggiungi animale</button>
                     <details>
                         <h2>Animali</h2>
                         <ul>
-                            {animals.map((animal, index) => {
-                                return <li>{animal}</li>
+                            {add.map((ad, index) => {
+                                return <li>{ad}</li>
                             })}
                         </ul>
                     </details>
