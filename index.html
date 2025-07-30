@@ -23,9 +23,13 @@
 
             const [show, setShow] = useState(false)
 
+            const [animalsName, setAnimalsName] = useState("")
 
             const aggAnimali = () => {
-
+                if (!animalsName) return;
+                setAdd(now => [...now, animalsName])
+                setAnimalsName("")
+                setShow(false)
             }
 
             return (
@@ -40,7 +44,17 @@
                         </ul>
                     </details>
                     <Modal
+                        title={"questa è la mia modale"}
                         show={show}
+                        onClose={() => setShow(false)}
+                        onConfirm={aggAnimali}
+                        content={
+                            <input
+                                type="text"
+                                value={animalsName}
+                                onChange={(e) => setAnimalsName(e.target.value)}
+                            />
+                        }
                     />
                 </>
             )
