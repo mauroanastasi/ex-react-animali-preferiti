@@ -21,9 +21,16 @@
 
             const [add, setAdd] = useState(animals)
 
+            const [show, setShow] = useState(false)
+
+
+            const aggAnimali = () => {
+
+            }
+
             return (
                 <>
-                    <button onClick={() => setAdd([...add, animalsChoices[Math.floor(Math.random() * animalsChoices.length)]])} >Aggiungi animale</button>
+                    <button onClick={() => setShow(true)} >Aggiungi animale</button>
                     <details>
                         <h2>Animali</h2>
                         <ul>
@@ -32,17 +39,44 @@
                             })}
                         </ul>
                     </details>
+                    <Modal
+                        show={show}
+                    />
                 </>
             )
         }
 
+        function Modal({
+            title,
+            content,
+            show = false,
+            onClose = () => { },
+            onConfirm = () => { }
+        }) {
+            return show && ReactDOM.createPortal(
+                <div className="modal-container">
+                    <div className="modal">
+                        <h2>{title}</h2>
+                        {content}
+                        <div>
+                            <button onClick={onClose}>Annulla</button>
+                            <button onClick={onConfirm}>Conferma</button>
+                        </div>
+                    </div>
+                </div>,
+                document.body
+            )
+        }
+
     </script>
+
     <script type="text/babel">
         const { createRoot } = ReactDOM;
         const listaAnimali = document.querySelector(`.lista-animali`);
         const root = createRoot(listaAnimali);
         root.render(< ReactApp />)
     </script>
+
 </head>
 
 <body>
